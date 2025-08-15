@@ -579,7 +579,7 @@ go
 CREATE OR ALTER PROCEDURE sp_getEmployees
 AS
 BEGIN
-	select emp_no, first_name, last_name, birth_date,
+	select emp_no, ci,first_name, last_name, birth_date,
 		   hire_date, correo, gender
 	from employees
 END
@@ -589,3 +589,17 @@ EXEC sp_getEmployees
 
 select * from employees
 select * from users
+
+
+-- Creacion de usuario y password para acceso a la base de datos empleados_db
+CREATE LOGIN kratos
+WITH PASSWORD = 'acronixFaz2412',
+     CHECK_POLICY = OFF;  -- Desactiva la política de contraseña si no quieres reglas de complejidad
+
+USE empleados_db;
+CREATE USER kratos FOR LOGIN kratos;
+
+ALTER ROLE db_owner ADD MEMBER kratos;
+
+--- cambiar en el web config el servidor correspondiente a su base de datos en sqlserver management studio
+--connectionString = "Server= nombreServidor ;Database=empleados_db;User ID=kratos;Password=acronixFaz2412;"
