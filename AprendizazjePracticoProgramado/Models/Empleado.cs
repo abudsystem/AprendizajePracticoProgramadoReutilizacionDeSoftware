@@ -9,12 +9,12 @@ namespace AprendizazjePracticoProgramado.Models
 {
     public class Empleado
     {
-           public string cedula
+           public string ci
         {
             get; set;
         }
 
-        public string birth_date
+        public string fechaNacimiento
         {
             get; set;
         }
