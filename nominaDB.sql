@@ -264,7 +264,14 @@ WHERE correo IS NULL;
 Go
 
 -- Insercion de usuario
-
+INSERT INTO users (emp_no, usuario, clave)
+	SELECT
+		emp_no,
+		Lower( LEFT(first_name, 1) + last_name ) AS usuario,
+		'usu' + CAST(ROW_NUMBER() OVER (ORDER BY emp_no) + 1999 AS VARCHAR(10)) as clave
+	FROM 
+		employees
+Go
 
 
 
@@ -480,4 +487,105 @@ Go
 
 
 -- Procedure para Autenticacion de usuarios
+-- Procedure de autenticacion
+CREATE OR ALTER PROCEDURE sp_userAuthentication
+@usuario varchar(150),
+@clave varchar(10),
+@message varchar(100) output
+AS
+Begin
+	If Not Exists (Select * from employees e join users u on e.emp_no = u.emp_no Where e.correo = @usuario)
+	Begin
+		Set @message = 'El usuario ingresado no existe en el sistema'
+	End
+	Else
+	Begin
+		If Not Exists (Select * From users Where clave = @clave)
+		Begin
+			Set @message = 'El password es incorrecto'
+		End
+		Else
+		Begin
+			set @message = 'Autenticacion exitosa'
+			Select 
+				u.usuario, 
+				concat(e.first_name, ' ', e.last_name) As nombre,
+				e.correo, 
+				e.ci as ci
+			From users u
+			join employees e
+			on e.emp_no = u.emp_no
+			where e.correo = @usuario
+				And clave = @clave
+		End
+	End
+End
+Go
 
+-- Usuario existente
+declare @message varchar(100)
+Exec sp_userAuthentication 'rocio.espinoza@correo.com', 'usu2021', @message output
+Select @message
+go
+
+select * from employees
+go
+
+--==========================================
+-- Procedure ingresar empleado y usuarios
+--==========================================
+CREATE OR ALTER PROCEDURE sp_insertEmployee
+@ci varchar(10),
+@fechaNacimiento varchar(20),
+@nombre varchar(50),
+@apellido varchar(50),
+@correo varchar(100),
+@genero char(1),
+@clave varchar(12)
+AS
+BEGIN
+	-- insercion de empelado
+	INSERT INTO employees (ci, birth_date, first_name, last_name, gender, hire_date, correo)
+	VALUES
+		(@ci,
+		@fechaNacimiento,
+		@nombre,
+		@apellido,
+		@genero,
+		CONVERT(VARCHAR(100), GETDATE(), 103),
+		@correo)
+
+	-- OBTENER ID DE EMPLEADO
+	DECLARE @emp_no int = SCOPE_IDENTITY();
+
+	-- generacion de usuario automatico
+	DECLARE @usr VARCHAR(40);
+	SET @usr = LOWER(LEFT(@nombre, 1)+@apellido);
+
+	--insertar usuario
+	INSERT INTO users (emp_no, usuario, clave)
+	values
+		(@emp_no, @usr, @clave)
+
+END
+GO
+
+exec sp_insertEmployee '1245763300', '12/09/2001', 'Federico', 'Navas', 
+				'federico.n@correo.com', 'M', 'federico19'
+
+go
+
+-- procedure para lista todos los empleados
+CREATE OR ALTER PROCEDURE sp_getEmployees
+AS
+BEGIN
+	select emp_no, first_name, last_name, birth_date,
+		   hire_date, correo, gender
+	from employees
+END
+go
+
+EXEC sp_getEmployees
+
+select * from employees
+select * from users

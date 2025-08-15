@@ -1,0 +1,107 @@
+﻿/* Contenedor general */
+body {
+    background: #000;
+}
+.signup-page {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    font-family: Arial, sans-serif;
+}
+
+/* Formulario */
+.signup-form {
+    background: #1e1d1d;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    max-width: 800px;
+    width: 100%;
+}
+
+/* Título */
+.signup-page h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+/* Wrapper con dos columnas */
+.form-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    color: #ccc;
+}
+
+/* Estilo de campos */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #000;
+    color: #fff;
+}
+
+/* Género */
+.genero-buttons {
+    display: flex;
+    gap: 20px;
+    margin-top: 5px;
+}
+
+ .genero-buttons label {
+     display: flex;
+     align-items: center;
+     gap: 5px;
+ }
+
+/* Botón y texto al 100% */
+.btn-login,
+.form-wrapper p {
+    grid-column: span 2;
+}
+
+/* Botón */
+.btn-login {
+    padding: 12px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+    .btn-login:hover {
+        background: #0056b3;
+    }
+
+/* Links */
+.signup-form a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+    .signup-form a:hover {
+        text-decoration: underline;
+    }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-wrapper {
+        grid-template-columns: 1fr;
+    }
+}
