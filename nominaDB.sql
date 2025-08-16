@@ -317,7 +317,7 @@ GO
 =====================================*/
 CREATE OR ALTER PROCEDURE sp_departmentInformation 
 AS
-	select * from departments
+	select * from departments;
 GO
 
 -- Visualizar todos los cargos que ha obtenido un empleado

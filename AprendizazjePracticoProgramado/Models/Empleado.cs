@@ -9,7 +9,7 @@ namespace AprendizazjePracticoProgramado.Models
 {
     public class Empleado
     {
-           public string ci
+        public string ci
         {
             get; set;
         }
