@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "Departamento";
+}
+
+<h2>Gestión Departamentos</h2>
+
+<html>
+<head>
+
+   
+   
+</head>
+<body>
+    <div>
+        <section aria-labelledby="agregarTitle">
+            <h2 id="agregarTitle">Agregar</h2>
+            <p>Crea un nuevo departamento para tu organización.</p>
+            <p><a href="#agregar">Agregar</a></p>
+        </section>
+
+        <section aria-labelledby="consultarTitle">
+            <h2 id="consultarTitle">Consultar</h2>
+            <p>Lista de departamentos existentes.</p>
+            <p><a href="#consultar">Consultar</a></p>
+        </section>
+
+        <section aria-labelledby="asignarTitle">
+            <h2 id="asignarTitle">Asignar</h2>
+            <p>Asignar empleados a un departamento.</p>
+            <p><a href="#asignar">Asignar</a></p>
+        </section>
+
+        <section aria-labelledby="historialTitle">
+            <h2 id="historialTitle">Historial</h2>
+            <p>Ver movimientos de empleados entre departamentos.</p>
+            <p><a href="#historial">Historial</a></p>
+        </section>
+    </div>
+
+
+    <!-- Formulario: creación de nuevos departamentos -->
+
+
+    <section id="agregar">
+        <h3>Agregar departamento</h3>
+        <form action="@Url.Action("Departamento","Departamento")" method="post">
+            @Html.AntiForgeryToken()
+            <div>
+                <label for="nombreDepar">Nombre</label>
+                <input id="nombreDepar" name="nombreDepar" type="text" maxlength="50" required="required" placeholder="nuevo apartamento" />
+            </div>
+
+            <div>
+                <button type="submit">Aceptar</button>
+                <button type="reset">Cancelar</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- Placeholders opcionales para las otras secciones -->
+    <section id="consultar"><h3>Departamentos existentes</h3></section>
+    <section id="asignar"><h3>Asignar departamento a empleado</h3></section>
+    <section id="historial"><h3>Historial de movimientos</h3></section>
+
+</body>
+
+</html>

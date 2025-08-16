@@ -589,3 +589,23 @@ EXEC sp_getEmployees
 
 select * from employees
 select * from users
+
+
+CREATE OR ALTER PROCEDURE sp_insertDeparment
+@nombreDepar varchar(50)
+AS
+BEGIN
+	--Validación si ya existe departamento con el mismo nombre
+	IF  EXISTS(SELECT 1 FROM dbo.departments WHERE dept_name = @nombreDepar)
+	BEGIN
+	RAISERROR(N'El departamento ya existe.',16,1);
+	RETURN;
+	END
+
+	INSERT INTO departments (dept_name) VALUES
+	(@nombreDepar)
+END
+GO
+
+EXEC sp_insertDeparment 'Prueba'
+GO
