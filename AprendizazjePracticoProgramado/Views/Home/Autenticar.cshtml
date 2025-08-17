@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Autenticar";
 }
+<!--
 
 <html>
 <head>
@@ -36,6 +37,34 @@
 </body>
 
 </html>
+-->
+@{
+    ViewBag.Title = "Autenticar";
+}
+<head>
+    <link href="~/Content/css/Registrar.css" rel="stylesheet" />
+</head>
 
+<div class="signup-page">
+    <form class="signup-form" method="post" action="@Url.Action("Login","Auth")">
+        <h2>Iniciar Sesión</h2>
 
-    
+        <div class="form-wrapper">
+            <!-- Usuario -->
+            <div class="form-group">
+                <label for="correo">Correo electrónico</label>
+                <input type="text" name="correo" id="correo" placeholder="Ingresa tu correo" required />
+            </div>
+
+            <!-- Clave -->
+            <div class="form-group">
+                <label for="clave">Contraseña</label>
+                <input type="password" name="clave" id="clave" placeholder="Ingresa tu contraseña" required />
+            </div>
+
+            <!-- Botón -->
+            <button type="submit" class="btn-login">Ingresar</button>
+
+        </div>
+    </form>
+</div>

@@ -1,47 +1,99 @@
-﻿body {
+﻿/* Fondo general */
+body {
+    background: #000;
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
 }
 
-.form-container {
-    width: 350px;
-    margin: 50px auto;
-    background: #ffffff;
+/* Contenedor */
+.signup-page {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+}
+
+/* Formulario de login */
+.signup-form {
+    background: #1e1d1d;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    max-width: 400px; /* más pequeño que el registro */
+    width: 100%;
 }
 
-    .form-container h2 {
+    /* Título */
+    .signup-form h2 {
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 25px;
+        font-size: 1.8rem;
+        color: #fff;
     }
 
-.input-box {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+/* Campos */
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: #ccc;
 }
 
-.submit-btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+    .form-group label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #ccc;
+    }
+
+    .form-group input {
+        padding: 10px;
+        border: 1px solid #555;
+        border-radius: 6px;
+        font-size: 1rem;
+        background: #000;
+        color: #fff;
+    }
+
+/* Botón */
+.btn-login {
+    padding: 12px;
+    background: #007bff;
+    color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
+    font-size: 1rem;
     cursor: pointer;
+    transition: background 0.3s ease;
 }
 
-    .submit-btn:hover {
-        background-color: #45a049;
+    .btn-login:hover {
+        background: #0056b3;
     }
 
-.error {
-    color: red;
-    font-size: 12px;
+/* Links */
+.signup-form a {
+    color: #007bff;
+    text-decoration: none;
 }
 
+    .signup-form a:hover {
+        text-decoration: underline;
+    }
+
+/* Texto centrado en links */
+.signup-form p {
+    text-align: center;
+    margin: 10px 0 0;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .signup-form {
+        padding: 20px;
+        max-width: 100%;
+    }
+}
